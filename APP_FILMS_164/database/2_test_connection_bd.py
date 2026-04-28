@@ -10,15 +10,12 @@ try:
         Une seule requête pour montrer la récupération des données de la BD en MySql.
         On va tester si on arrive à lire tes créatures (même si la table est vide).
     """
-    # ICI : On remplace la requête du prof par la tienne
     strsql_creatures_afficher = """SELECT * FROM Creatures ORDER BY ID_Creature ASC"""
 
     with DBconnection() as db:
-        # On exécute ta nouvelle requête
         db.execute(strsql_creatures_afficher)
         result = db.fetchall()
 
-        # On affiche le résultat dans la console en bas de l'écran
         print("Résultat de la table Creatures : ", result, " Type : ", type(result))
 
 
