@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %} Dinos et Aliments {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Afficher les Créatures et leurs Aliments favoris (Relation N:M)</p>
+            <table class="table table-hover">
+                {% if data %}
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom du Dino</th>
+                            <th>Torpeur</th>
+                            <th>Régime</th>
+                            <th>Aliments Favoris</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td>{{ row.ID_Creature }}</td>
+                                <td>{{ row.Nom }}</td>
+                                <td>{{ row.Torpeur_base }}</td>
+                                <td>{{ row.Regime_alimentaire }}</td>
+                                <td>
+                                    {% if row.AlimentsCreature %}
+                                        <strong>{{ row.AlimentsCreature }}</strong>
+                                    {% else %}
+                                        <span class="text-muted">Aucun aliment défini</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-warning btn-sm" href="{{ url_for('edit_aliments_creature_selected', id_creature_aliments_edit_html=row.ID_Creature) }}">Modifier les aliments</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% else %}
+                    <tbody>
+                        <tr><td>Aucune donnée trouvée.</td></tr>
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

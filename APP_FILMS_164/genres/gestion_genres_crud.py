@@ -43,7 +43,7 @@ def genres_afficher(order_by, id_genre_sel):
                                           f"{genres_afficher.__name__} ; "
                                           f"{Exception_genres_afficher}")
 
-    return render_template("genres/genres_afficher.html", data=data_genres)
+    return render_template("genres/maps_afficher.html", data=data_genres)
 
 @app.route("/genres_ajouter", methods=['GET', 'POST'])
 def genres_ajouter_wtf():
@@ -69,4 +69,4 @@ def genres_ajouter_wtf():
                                             f"{genres_ajouter_wtf.__name__} ; "
                                             f"{Exception_genres_ajouter_wtf}")
 
-    return render_template("genres/genres_ajouter_wtf.html", form=form)
+    return render_template("genres/maps_ajouter.html", form=form)

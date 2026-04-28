@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %} Modifier Aliments {% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Modifier le régime de : {{ data_creature_selected[0].Nom }}</h2>
+    <form action="{{ url_for('update_aliments_creature_selected') }}" method="POST">
+        <div class="form-group mt-4">
+            <label><strong>Sélectionnez les aliments favoris (Maintenez CTRL pour en sélectionner plusieurs) :</strong></label>
+            <select multiple class="form-control" name="name_select_tags" size="10">
+                {% for row in data_aliments_attribues %}
+                    <option value="{{ row.ID_Aliment }}" selected>
+                        {{ row.Nom }}
+                    </option>
+                {% endfor %}
+
+                {% for row in data_aliments_non_attribues %}
+                    <option value="{{ row.ID_Aliment }}">
+                        {{ row.Nom }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-warning">Mettre à jour les aliments</button>
+        <a href="{{ url_for('creatures_aliments_afficher', id_creature_sel=0) }}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

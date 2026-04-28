@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %} Ajouter une CREATURE {% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Ajouter un nouveau spécimen ARK</h2>
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.nom_creature_wtf.label }}<br>
+            {{ form.nom_creature_wtf(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.torpeur_creature_wtf.label }}<br>
+            {{ form.torpeur_creature_wtf(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.regime_creature_wtf.label }}<br>
+            {{ form.regime_creature_wtf(class="form-control") }}
+        </div>
+        <br>
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('creatures_afficher', order_by='ASC', id_creature_sel=0) }}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+{% endblock %}

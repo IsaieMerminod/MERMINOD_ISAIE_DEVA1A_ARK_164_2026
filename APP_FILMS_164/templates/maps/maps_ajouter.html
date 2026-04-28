@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Ajouter une MAP {% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Ajouter une nouvelle Map ARK</h2>
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.nom_map_wtf.label }}<br>
+            {{ form.nom_map_wtf(class="form-control") }}
+        </div>
+        <br>
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('maps_afficher', order_by='ASC', id_map_sel=0) }}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+{% endblock %}

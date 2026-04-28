@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %} Afficher les CREATURES {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Afficher les créatures de ARK</p>
+            <a href="{{ url_for('creatures_ajouter_wtf') }}" class="btn btn-success mb-3">Ajouter une créature</a>
+            <table class="table table-hover">
+                {% if data %}
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Torpeur</th>
+                            <th>Régime</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td>{{ row.ID_Creature }}</td>
+                                <td>{{ row.Nom }}</td>
+                                <td>{{ row.Torpeur_base }}</td>
+                                <td>{{ row.Regime_alimentaire }}</td>
+                                <td>
+                                    <a href="{{ url_for('creatures_update_wtf', id_creature_btn_edit_html=row.ID_Creature) }}" class="btn btn-outline-warning btn-sm">Éditer</a>
+                                    <a href="{{ url_for('creatures_delete_wtf', id_creature_btn_delete_html=row.ID_Creature) }}" class="btn btn-outline-danger btn-sm">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% else %}
+                    <tbody>
+                        <tr>
+                            <td>Aucune créature trouvée.</td>
+                        </tr>
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

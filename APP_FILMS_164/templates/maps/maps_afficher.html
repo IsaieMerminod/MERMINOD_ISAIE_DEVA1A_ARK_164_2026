@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %} Afficher les MAPS {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Afficher les Maps de ARK</p>
+            <a href="{{ url_for('maps_ajouter_wtf') }}" class="btn btn-success mb-3">Ajouter une Map</a>
+            <table class="table table-hover">
+                {% if data %}
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom de la Map</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td>{{ row.ID_Map }}</td>
+                                <td>{{ row.Nom_map }}</td>
+                                <td>
+                                    <a href="{{ url_for('maps_update_wtf', id_map_btn_edit_html=row.ID_Map) }}" class="btn btn-outline-warning btn-sm">Éditer</a>
+                                    <a href="{{ url_for('maps_delete_wtf', id_map_btn_delete_html=row.ID_Map) }}" class="btn btn-outline-danger btn-sm">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% else %}
+                    <tbody>
+                        <tr><td>Aucune map trouvée.</td></tr>
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

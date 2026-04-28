@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Modifier une MAP {% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Modifier le nom de la Map</h2>
+    <form action="" method="POST" novalidate>
+        {{ form_update.hidden_tag() }}
+        <div class="form-group">
+            {{ form_update.nom_map_update_wtf.label }}<br>
+            {{ form_update.nom_map_update_wtf(class="form-control") }}
+        </div>
+        <br>
+        {{ form_update.submit(class="btn btn-warning") }}
+        <a href="{{ url_for('maps_afficher', order_by='ASC', id_map_sel=0) }}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

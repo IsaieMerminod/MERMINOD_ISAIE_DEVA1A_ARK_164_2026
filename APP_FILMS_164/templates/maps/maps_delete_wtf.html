@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} Supprimer une MAP {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+       <div class="col-md-12">
+          <div class="alert alert-danger">
+             <h4 class="alert-heading">Suppression d'une Map</h4>
+             <p>Voulez-vous vraiment supprimer cette Map ?</p>
+          </div>
+          <form action="{{ url_for('maps_delete_wtf') }}" method="POST">
+             <input type="hidden" name="id_map_btn_delete_html" value="{{ data_delete.ID_Map }}">
+             <div class="form-group">
+                <label>Nom de la Map :</label>
+                <input type="text" class="form-control" value="{{ data_delete.Nom_map }}" readonly>
+             </div>
+             <br>
+             <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+             <a href="{{ url_for('maps_afficher', order_by='ASC', id_map_sel=0) }}" class="btn btn-secondary">Annuler</a>
+          </form>
+       </div>
+    </div>
+</div>
+{% endblock %}
