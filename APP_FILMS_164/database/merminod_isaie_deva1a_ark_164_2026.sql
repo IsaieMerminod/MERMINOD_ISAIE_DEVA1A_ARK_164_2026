@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 28 avr. 2026 à 11:04
+-- Généré le : mar. 28 avr. 2026 à 14:17
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -41,11 +41,13 @@ CREATE TABLE `aliments` (
 --
 
 INSERT INTO `aliments` (`ID_Aliment`, `Nom`, `Efficacite_tame`) VALUES
-(1, 'Kibble Supérieure', 100.00),
-(2, 'Viande de mouton', 80.00),
-(3, 'Viande crue', 50.00),
-(4, 'Baies', 20.00),
-(5, 'Légumes', 40.00);
+(1, 'Kibble Exceptionnelle', 100.00),
+(2, 'Kibble Supérieure', 95.00),
+(3, 'Viande de mouton', 85.00),
+(4, 'Viande supérieure crue', 70.00),
+(5, 'Viande crue', 50.00),
+(6, 'Mejoberry', 30.00),
+(7, 'Légumes', 45.00);
 
 -- --------------------------------------------------------
 
@@ -57,6 +59,15 @@ CREATE TABLE `categories` (
   `ID_Cat` int(11) NOT NULL,
   `Nom_categorie` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`ID_Cat`, `Nom_categorie`) VALUES
+(1, 'Terrestre'),
+(2, 'Volant'),
+(3, 'Aquatique');
 
 -- --------------------------------------------------------
 
@@ -77,10 +88,14 @@ CREATE TABLE `creatures` (
 --
 
 INSERT INTO `creatures` (`ID_Creature`, `Nom`, `Torpeur_base`, `Regime_alimentaire`, `ID_Cat`) VALUES
-(3, 'Rex', 1550, 'Carnivore', NULL),
-(4, 'Raptor', 120, 'Carnivore', NULL),
-(5, 'Argentavis', 550, 'Carnivore', NULL),
-(6, 'Parasaur', 150, 'Herbivore', NULL);
+(1, 'Rex', 1550, 'Carnivore', 1),
+(2, 'Raptor', 180, 'Carnivore', 1),
+(3, 'Argentavis', 600, 'Carnivore', 2),
+(4, 'Spinosaur', 850, 'Carnivore', 1),
+(5, 'Giganotosaurus', 80000, 'Carnivore', 1),
+(6, 'Dodo', 30, 'Herbivore', 1),
+(7, 'Therizinosaur', 900, 'Herbivore', 1),
+(8, 'Mosasaur', 3000, 'Carnivore', 3);
 
 -- --------------------------------------------------------
 
@@ -99,9 +114,13 @@ CREATE TABLE `creature_aliment` (
 --
 
 INSERT INTO `creature_aliment` (`ID_Creature`, `ID_Aliment`, `Quantite_requise`) VALUES
-(3, 4, 1),
-(5, 1, 1),
-(5, 3, 1);
+(1, 1, 17),
+(1, 4, 45),
+(3, 3, 12),
+(5, 1, 30),
+(6, 6, 20),
+(7, 7, 150),
+(8, 4, 100);
 
 -- --------------------------------------------------------
 
@@ -143,13 +162,23 @@ CREATE TABLE `localisations` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `maps`
+--
+
+CREATE TABLE `maps` (
+  `ID_Map` int(11) NOT NULL,
+  `Nom_map` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Déchargement des données de la table `maps`
 --
 
 INSERT INTO `maps` (`ID_Map`, `Nom_map`) VALUES
 (1, 'The Island'),
 (2, 'Scorched Earth'),
-(3, 'Aberration');DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(3, 'Aberration'),
+(4, 'Extinction');
 
 -- --------------------------------------------------------
 
@@ -280,19 +309,19 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `aliments`
 --
 ALTER TABLE `aliments`
-  MODIFY `ID_Aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_Aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID_Cat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `creatures`
 --
 ALTER TABLE `creatures`
-  MODIFY `ID_Creature` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_Creature` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `favoris`
@@ -310,7 +339,7 @@ ALTER TABLE `localisations`
 -- AUTO_INCREMENT pour la table `maps`
 --
 ALTER TABLE `maps`
-  MODIFY `ID_Map` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Map` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `photos`

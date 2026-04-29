@@ -1,12 +1,29 @@
--- Requête pour afficher toutes les Maps
-SELECT ID_Map, Nom_map FROM Maps ORDER BY ID_Map ASC;
+-- ==========================================================
+-- REQUÊTES SQL DU PROJET ARK_ASCENDED_HUB
+-- Auteur : Isaïe Merminod
+-- ==========================================================
 
--- Requête pour ajouter une nouvelle Map
-INSERT INTO Maps (ID_Map, Nom_map) VALUES (NULL, 'Scorched Earth');
+-- 1. Liste simple : Afficher toutes les cartes disponibles
+SELECT Nom_map FROM maps ORDER BY ID_Map ASC;
 
--- Requête complexe avec jointure pour afficher les dinos et leurs aliments
-SELECT Creatures.ID_Creature, Creatures.Nom, Creatures.Torpeur_base, Creatures.Regime_alimentaire,
-GROUP_CONCAT(Aliments.Nom) as AlimentsCreature FROM creature_aliment
-RIGHT JOIN Creatures ON Creatures.ID_Creature = creature_aliment.ID_Creature
-LEFT JOIN Aliments ON Aliments.ID_Aliment = creature_aliment.ID_Aliment
-GROUP BY Creatures.ID_Creature;
+-- 2. Jointure 1:N : Afficher les créatures avec le nom de leur catégorie (Terrestre, etc.)
+SELECT creatures.Nom, categories.Nom_categorie
+FROM creatures
+JOIN categories ON creatures.ID_Cat = categories.ID_Cat;
+
+-- 3. Requête complexe N:M : Dinosaures et leurs aliments préférés avec quantités
+-- C'est la requête qui alimente la page "Dinos & Aliments"
+SELECT creatures.Nom AS Dinosaure, aliments.Nom AS Nourriture, creature_aliment.Quantite_requise
+FROM creature_aliment
+JOIN creatures ON creature_aliment.ID_Creature = creatures.ID_Creature
+JOIN aliments ON creature_aliment.ID_Aliment = aliments.ID_Aliment
+ORDER BY creatures.Nom ASC;
+
+-- 4. Agrégation : Trouver la créature qui a la plus grosse torpeur de base (Le Giganotosaurus)
+SELECT Nom, Torpeur_base
+FROM creatures
+WHERE Torpeur_base = (SELECT MAX(Torpeur_base) FROM creatures);
+
+-- 5. Filtre : Afficher uniquement les carnivores qui vivent dans l'eau (Aquatique)
+SELECT Nom FROM creatures
+WHERE Regime_alimentaire = 'Carnivore' AND ID_Cat = 3;
